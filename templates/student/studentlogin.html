@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login | Secure Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 300% 300%;
+      animation: gradientMove 10s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Floating shapes for a premium background */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      filter: blur(60px);
+      animation: float 8s infinite ease-in-out alternate;
+    }
+
+    .bg-shape:nth-child(1) {
+      width: 200px; height: 200px;
+      background: #00C9FF;
+      top: 10%; left: 15%;
+    }
+
+    .bg-shape:nth-child(2) {
+      width: 300px; height: 300px;
+      background: #92FE9D;
+      bottom: 10%; right: 10%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      from {transform: translateY(0);}
+      to {transform: translateY(-30px);}
+    }
+
+    /* LOGIN BOX */
+    .login-box {
+      position: relative;
+      z-index: 2;
+      width: 400px;
+      padding: 50px 40px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      font-size: 24px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #00DBDE, #FC00FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .login-box input[type="text"]:focus,
+    .login-box input[type="password"]:focus {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 10px #00C9FF;
+    }
+
+    .login-box input[type="submit"] {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00C9FF, #92FE9D);
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login-box input[type="submit"]:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 201, 255, 0.6);
+    }
+
+    .login-box p {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #ddd;
+    }
+
+    .login-box p a {
+      color: #00C9FF;
+      text-decoration: none;
+    }
+
+    .login-box p a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        width: 90%;
+        padding: 40px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background Shapes -->
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+
+  <!-- LOGIN BOX -->
+  <form class="login-box" method="post">
+    {% csrf_token %}
+    <h2>Student Login Panel</h2>
+
+    {% render_field form.username class="form-control" autocomplete="off" placeholder="Username" %}
+    {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
+
+    <input type="submit" value="Login">
+
+    <p>Forgot Password? <a href="#">Recover</a></p>
+  </form>
+</body>
+</html>

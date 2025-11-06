@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Online Examination System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 & Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        background-color: #111;
+      }
+
+      /* ===== HERO SECTION ===== */
+      #section-jumbotron {
+        background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
+          url("{% static 'image/unnamed.webp' %}") center/cover no-repeat;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        z-index: 2;
+        animation: fadeInUp 1.5s ease;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #00d4ff;
+        text-shadow: 2px 2px 20px rgba(0, 212, 255, 0.4);
+      }
+
+      .hero-content p {
+        font-size: 1.25rem;
+        color: #d6d6d6;
+        margin-top: 15px;
+        margin-bottom: 25px;
+      }
+
+      .btn-cta {
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 14px 35px;
+        border-radius: 50px;
+        background: linear-gradient(90deg, #00d4ff, #007bff);
+        color: white;
+        border: none;
+        transition: all 0.4s ease;
+      }
+
+      .btn-cta:hover {
+        background: linear-gradient(90deg, #007bff, #00d4ff);
+        transform: translateY(-3px);
+        box-shadow: 0px 6px 20px rgba(0, 212, 255, 0.4);
+      }
+
+      /* ===== FEATURE SECTION ===== */
+      .features {
+        background: #0c0c0c;
+        padding: 80px 20px;
+      }
+
+      .feature-box {
+        background: #181818;
+        border-radius: 15px;
+        padding: 40px 25px;
+        text-align: center;
+        transition: all 0.3s ease;
+        color: #ddd;
+      }
+
+      .feature-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 8px 25px rgba(0, 212, 255, 0.2);
+      }
+
+      .feature-box i {
+        font-size: 45px;
+        color: #00d4ff;
+        margin-bottom: 20px;
+      }
+
+      .feature-box h5 {
+        font-weight: 600;
+        color: #fff;
+      }
+
+      /* ===== ANIMATION ===== */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .hero-content h1 {
+          font-size: 2.3rem;
+        }
+
+        .hero-content p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    {% include "exam/navbar.html" %}
+
+    <!-- Hero Section -->
+    <section id="section-jumbotron">
+      <div class="hero-content">
+        <h1>Online Examination System</h1>
+        <p>Secure • Smart • Simple — Conduct and Attend Exams from Anywhere</p>
+        <a href="/student/studentsignup" class="btn btn-cta">
+          <i class="fa-solid fa-user-graduate me-2"></i> Get Started
+        </a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <div class="row text-center mb-5">
+          <div class="col">
+            <h2 class="fw-bold text-info">Why Choose Us?</h2>
+            <p class="text-muted">Modern platform trusted by institutions worldwide</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-box">
+              <i class="fa-solid fa-lock"></i>
+              <h5>Advanced Security</h5>
+              <p>All data is encrypted using AES-256 and stored safely with privacy-first architecture.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box">
+              <i class="fa-solid fa-laptop-code"></i>
+              <h5>Smart Exam Interface</h5>
+              <p>Experience a smooth and responsive exam environment accessible on all devices.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box">
+              <i class="fa-solid fa-chart-line"></i>
+              <h5>Instant Results</h5>
+              <p>Automatic evaluation and result generation system with real-time analytics.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include "exam/footer.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

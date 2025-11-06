@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Login | Admin Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top left, #1e3c72, #2a5298);
+    }
+
+    /* Animated floating circles */
+    .background-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .background-shapes span {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.08);
+      animation: move 10s linear infinite;
+      border-radius: 50%;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Login Card */
+    .login-box {
+      position: relative;
+      z-index: 1;
+      width: 400px;
+      padding: 50px 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 24px;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #00DBDE, #FC00FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .login-box input[type="text"]:focus,
+    .login-box input[type="password"]:focus {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 10px #00DBDE;
+    }
+
+    .login-box input[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00DBDE, #FC00FF);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .login-box input[type="submit"]:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 219, 222, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        width: 90%;
+        padding: 40px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-shapes">
+    <span style="left: 10%; animation-delay: 0s;"></span>
+    <span style="left: 25%; width: 100px; height: 100px; animation-delay: 2s;"></span>
+    <span style="left: 50%; animation-delay: 4s;"></span>
+    <span style="left: 70%; width: 120px; height: 120px; animation-delay: 6s;"></span>
+    <span style="left: 85%; animation-delay: 8s;"></span>
+  </div>
+
+  <form class="login-box" method="post">
+    {% csrf_token %}
+    <h2>Admin Secure Login</h2>
+
+    {% render_field form.username class="form-control" autocomplete="off" placeholder="Username" %}
+    {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
+
+    <input type="submit" value="Sign In">
+  </form>
+</body>
+</html>

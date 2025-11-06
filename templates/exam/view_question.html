@@ -1,0 +1,87 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style>
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 60px;
+    }
+
+    .table th,
+    .table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title text-center">Questions for {{ course.course_name }}</h4>
+    </div>
+
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Question</th>
+          <th>Marks</th>
+          <th>File</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% if questions %}
+          {% for q in questions %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              {% if q.question %}
+                {{ q.question }}
+              {% else %}
+                <em>Uploaded File Question</em>
+              {% endif %}
+            </td>
+            <td>{{ q.marks }}</td>
+            <td>
+              {% if q.question_file %}
+                <a href="{{ q.question_file.url }}" target="_blank" class="btn btn-info btn-xs">
+                  View File
+                </a>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+            <td>
+              <a class="btn btn-danger btn-xs" href="{% url 'delete-question' q.id %}">
+                <span class="glyphicon glyphicon-trash"></span> Delete
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="5" class="text-center">No questions available for this course.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

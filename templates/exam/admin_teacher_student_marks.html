@@ -1,0 +1,65 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h3 class="text-center mb-4">Teacher → Student Marks Report</h3>
+
+  <!-- Teacher Selection -->
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="teacher_id">Select Teacher:</label>
+      <select class="form-control" name="teacher_id" id="teacher_id" onchange="this.form.submit()">
+        <option value="">-- Choose Teacher --</option>
+        {% for teacher in teachers %}
+          <option value="{{ teacher.id }}" {% if selected_teacher and teacher.id == selected_teacher.id %}selected{% endif %}>
+            {{ teacher.user.first_name }} {{ teacher.user.last_name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+
+  {% if selected_teacher %}
+  <!-- Student Selection -->
+  <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="teacher_id" value="{{ selected_teacher.id }}">
+    <div class="form-group">
+      <label for="student_id">Select Student (Under {{ selected_teacher.user.first_name }}):</label>
+      <select class="form-control" name="student_id" id="student_id" onchange="this.form.submit()">
+        <option value="">-- Choose Student --</option>
+        {% for s in students %}
+          <option value="{{ s.id }}" {% if selected_student and s.id == selected_student.id %}selected{% endif %}>
+            {{ s.user.first_name }} {{ s.user.last_name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+  {% endif %}
+
+  {% if results %}
+  <h5 class="mt-4">Results for {{ selected_student.user.first_name }} {{ selected_student.user.last_name }}</h5>
+  <table class="table table-bordered mt-3">
+    <thead class="thead-dark">
+      <tr>
+        <th>Exam</th>
+        <th>Total Marks</th>
+        <th>Obtained Marks</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+      <tr>
+        <td>{{ r.exam.course_name }}</td>
+        <td>{{ r.exam.total_marks }}</td>
+        <td>{{ r.marks }}</td>
+        <td>{{ r.date|date:"Y-m-d H:i" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock content %}
